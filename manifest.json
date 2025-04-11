@@ -3,7 +3,7 @@
   "name": "Pinterest Image Describer",
   "version": "1.0",
   "description": "Extracts images from Pinterest, sends them to the Gemini API, and reads descriptions aloud.",
-  "permissions": ["activeTab", "scripting","storage","tts"],
+  "permissions": ["activeTab", "scripting","storage","tts","tabs"],
   "background": {
       "service_worker": "background.js"
   },
