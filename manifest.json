@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Pinterest Image Describer",
+  "version": "1.0",
+  "description": "Extracts images from Pinterest, sends them to the Gemini API, and reads descriptions aloud.",
+  "permissions": ["activeTab", "scripting","storage","tts"],
+  "background": {
+      "service_worker": "background.js"
+  },
+  "host_permissions": ["https://*.pinterest.com/*", "https://i.pinimg.com/*"],
+  "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+          "16": "assets/icon.png",
+          "48": "assets/icon.png",
+          "128": "assets/icon.png"
+      }
+  },
+  "content_scripts": [
+      {
+          "matches": ["https://*.pinterest.com/*"],
+          "js": ["content.js"]
+      }
+  ]
+}
