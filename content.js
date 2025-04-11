@@ -1,8 +1,21 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log("Message recieved here");
     if (request.action === "analyze_images") {
-        const images = document.querySelectorAll("img"); // Select all images on Pinterest page
-        let imageDataArray = [];
+        //const images = document.querySelectorAll("img"); // Select all images on Pinterest page
+        
+
+        const images = Array.from(document.querySelectorAll("img")).filter(img => {
+            const w = img.naturalWidth;
+            const h = img.naturalHeight;
+            const src = img.src;
+        
+            // Exclude if the image is very small or contains keywords like profile/avatar
+            const isTiny = (w < 100 || h < 100); // adjust threshold as needed
+            const isProfile = /avatar|profile|user|icon/.test(src);
+        
+            return !isTiny && !isProfile;
+        });
+         let imageDataArray = [];
 
         images.forEach((img, index) => {
             console.log("Image: ", index, img.src);
